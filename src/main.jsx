@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import TopRatedMovies from './TopRatedMovies.jsx'
 import Homepage from './Homepage.jsx'
 import './index.css'
 

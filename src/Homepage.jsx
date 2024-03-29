@@ -151,7 +151,7 @@ function Homepage() {
               All Episodes
             </button>
           </div>
-          <h1 className="pt-2 sm:pt-9 text-[12px] sm:text-[18px] font-bold">
+          <h1 className="pt-2 sm:pt-11 text-[12px] sm:text-[18px] font-bold">
             POPULAR MOVIES
           </h1>
           <div className=" section w-[1900px] mx-auto pb-5 pt-0">
