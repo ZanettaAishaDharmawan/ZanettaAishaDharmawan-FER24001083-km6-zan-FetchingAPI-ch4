@@ -8,6 +8,8 @@ import MovieDetail from "./MovieDetails";
 import NowPlayingPage from "./NowPlayingPage";
 import PopularPage from "./PopularPage";
 import TopRatedPage from "./TopRatedPage";
+import LoginForm from "./Login";
+import ResponsePage from "./ResponsePage";
 import "./App.css";
 
 export default function App() {
@@ -35,6 +37,14 @@ export default function App() {
     {
       path: "/popular",
       element: <PopularPage />,
+    },
+    {
+      path: "/login",
+      element: <LoginForm />,
+    },
+    {
+      path: "/response",
+      element: <ResponsePage />,
     },
   ]);
 

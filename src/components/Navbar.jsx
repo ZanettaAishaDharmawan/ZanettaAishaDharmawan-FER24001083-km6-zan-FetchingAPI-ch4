@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-function Navbar({ searchTerm, setSearchTerm }) {
+function Navbar({ searchTerm, setSearchTerm, user }) {
   const location = useLocation();
   const [navbarBackground, setNavbarBackground] = useState("bg-background");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const handleSearch = () => {
     // Navigate to the search results page with the search term as a query parameter
@@ -20,10 +21,21 @@ function Navbar({ searchTerm, setSearchTerm }) {
 
   window.addEventListener("scroll", handleScroll);
 
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+  const handleLogout = () => {
+    // Perform logout logic here
+    // For example, clearing local storage and redirecting to login page
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
   return (
     <nav className={`py-5 fixed top-0 w-full z-10 px-12 ${navbarBackground}`}>
       <div className="flex justify-between items-center">
-        <a href="/" className="text-red-500 text-xl font-bold ">
+        <a href="/" className="text-red-500 text-xl font-bold">
           MOFLIX
         </a>
         <div className="hidden md:flex items-center gap-5">
@@ -79,6 +91,32 @@ function Navbar({ searchTerm, setSearchTerm }) {
                 Top Rated
               </p>
             </a>
+            <div className="relative">
+              <a
+                onClick={toggleDropdown}
+                className="text-white cursor-pointer hover:text-primary"
+              >
+                <p className="text-sm font-normal text-white cursor-pointer hover:text-primary hover:font-semibold">
+                Hello, {user && user.firstName}              </p>
+                
+              </a>
+              {dropdownVisible && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                  <a
+                    href="/profile"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Profile
+                  </a>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

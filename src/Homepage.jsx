@@ -94,10 +94,40 @@ function Homepage() {
     };
   }, []);
 
+  const [user, setUser] = useState("");
+
+  async function getMe() {
+    try {
+      const response = await axios.get("https://dummyjson.com/auth/me", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const data = response.data;
+      console.log("data user:", data);
+      setUser(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  useEffect(() => {
+    getMe();
+  }, []);
+
   return (
     <div className="items-center justify-center self-center">
       {/* navbar */}
-      <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Navbar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        user={user}
+      />
 
       <div className="relative">
         <img src={StrangerThings} alt="Hero" className="w-full z-0" />
